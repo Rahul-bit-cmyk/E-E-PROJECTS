@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #2d3748;
+            background: #f7fafc;
+        }
+        
+        h1 {
+            color: #1a365d;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #2c5282;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #2c5282;
+            font-size: 1.8em;
+            margin-top: 40px;
+            border-left: 5px solid #2c5282;
+            padding-left: 15px;
+            background: #ebf8ff;
+            padding: 10px 15px;
+        }
+        
+        h3 {
+            color: #2d3748;
+            font-size: 1.4em;
+            margin-top: 25px;
+        }
+        
+        .section {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .diagram {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        
+        th {
+            background: #2c5282;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .glossary-term {
+            background: #ebf8ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        
+        .reference {
+            padding: 10px;
+            border-left: 3px solid #2c5282;
+            margin: 10px 0;
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <h1>PLC and SCADA Control System Design Documentation</h1>
+
+    <div class="section">
+        <h2>1. System Architecture Overview</h2>
+        
+        <!-- SVG System Architecture Diagram -->
+        <svg viewBox="0 0 800 400" class="diagram">
+            <!-- Main PLC Controller -->
+            <rect x="350" y="50" width="100" height="60" fill="#2c5282" rx="5"/>
+            <text x="400" y="85" fill="white" text-anchor="middle">Main PLC</text>
+            
+            <!-- SCADA Server -->
+            <rect x="350" y="300" width="100" height="60" fill="#2c5282" rx="5"/>
+            <text x="400" y="335" fill="white" text-anchor="middle">SCADA Server</text>
+            
+            <!-- Field Devices Left -->
+            <rect x="100" y="150" width="80" height="40" fill="#4299e1" rx="5"/>
+            <text x="140" y="175" fill="white" text-anchor="middle">Sensors</text>
+            
+            <!-- Field Devices Right -->
+            <rect x="620" y="150" width="80" height="40" fill="#4299e1" rx="5"/>
+            <text x="660" y="175" fill="white" text-anchor="middle">Actuators</text>
+            
+            <!-- Connection Lines -->
+            <line x1="400" y1="110" x2="400" y2="300" stroke="#2c5282" stroke-width="2"/>
+            <line x1="180" y1="170" x2="350" y2="80" stroke="#4299e1" stroke-width="2"/>
+            <line x1="450" y1="80" x2="620" y2="170" stroke="#4299e1" stroke-width="2"/>
+        </svg>
+    </div>
+
+    <div class="section">
+        <h2>2. PLC Control Logic</h2>
+        
+        <!-- SVG PLC Logic Diagram -->
+        <svg viewBox="0 0 800 300" class="diagram">
+            <!-- Input Processing -->
+            <rect x="100" y="100" width="150" height="80" fill="#4299e1" rx="5"/>
+            <text x="175" y="145" fill="white" text-anchor="middle">Input Processing</text>
+            
+            <!-- Control Logic -->
+            <rect x="325" y="100" width="150" height="80" fill="#2c5282" rx="5"/>
+            <text x="400" y="145" fill="white" text-anchor="middle">Control Logic</text>
+            
+            <!-- Output Processing -->
+            <rect x="550" y="100" width="150" height="80" fill="#4299e1" rx="5"/>
+            <text x="625" y="145" fill="white" text-anchor="middle">Output Processing</text>
+            
+            <!-- Arrows -->
+            <path d="M250,140 L325,140" stroke="#2d3748" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <path d="M475,140 L550,140" stroke="#2d3748" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Arrow Definitions -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#2d3748"/>
+                </marker>
+            </defs>
+        </svg>
+        
+        <h3>Control Logic Implementation</h3>
+        <div class="code-block">
+            <pre>
+// PLC Ladder Logic Example
+NETWORK 1 // Temperature Control
+    LD   "Temp_Sensor"
+    GT   "Temp_Setpoint"
+    THEN "Cooling_System"
+    
+NETWORK 2 // Pressure Monitoring
+    LD   "Pressure_Sensor"
+    GT   "Pressure_Max"
+    THEN "Alarm_High_Pressure"
+    R    "Process_Running"</pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. SCADA Interface Design</h2>
+        
+        <!-- SVG SCADA Interface Mockup -->
+        <svg viewBox="0 0 800 400" class="diagram">
+            <!-- Main Window -->
+            <rect x="50" y="50" width="700" height="300" fill="#f7fafc" stroke="#2c5282" stroke-width="2"/>
+            
+            <!-- Title Bar -->
+            <rect x="50" y="50" width="700" height="40" fill="#2c5282"/>
+            <text x="400" y="75" fill="white" text-anchor="middle">Process Overview</text>
+            
+            <!-- Control Panels -->
+            <rect x="70" y="110" width="200" height="220" fill="white" stroke="#4299e1" stroke-width="2"/>
+            <text x="170" y="130" fill="#2c5282" text-anchor="middle">Control Panel</text>
+            
+            <!-- Trend Display -->
+            <rect x="290" y="110" width="440" height="220" fill="white" stroke="#4299e1" stroke-width="2"/>
+            <text x="510" y="130" fill="#2c5282" text-anchor="middle">Trend Display</text>
+            
+            <!-- Trend Lines -->
+            <path d="M310,220 Q380,180 450,240 T590,200" stroke="#4299e1" fill="none" stroke-width="2"/>
+            <path d="M310,260 Q380,290 450,250 T590,270" stroke="#2c5282" fill="none" stroke-width="2"/>
+        </svg>
+    </div>
+
+    <div class="section">
+        <h2>4. System Specifications</h2>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Specification</th>
+                <th>Performance</th>
+            </tr>
+            <tr>
+                <td>PLC CPU</td>
+                <td>Siemens S7-1500</td>
+                <td>1ms/instruction</td>
+            </tr>
+            <tr>
+                <td>Communication</td>
+                <td>PROFINET</td>
+                <td>100Mbps</td>
+            </tr>
+            <tr>
+                <td>SCADA Software</td>
+                <td>WinCC Professional</td>
+                <td>1s refresh rate</td>
+            </tr>
+            <tr>
+                <td>Database</td>
+                <td>SQL Server 2022</td>
+                <td>10,000 tags</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>5. Glossary of Terms</h2>
+        <div class="glossary-term">
+            <h3>PLC (Programmable Logic Controller)</h3>
+            <p>Industrial digital computer designed for automated control of manufacturing processes.</p>
+        </div>
+        <div class="glossary-term">
+            <h3>SCADA (Supervisory Control and Data Acquisition)</h3>
+            <p>System for remote monitoring and control of industrial processes.</p>
+        </div>
+        <div class="glossary-term">
+            <h3>PROFINET</h3>
+            <p>Industrial Ethernet standard for automation.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. References</h2>
+        <div class="reference">
+            <p>1. Smith, J.R. (2024). "Modern SCADA Systems in Industrial Automation." IEEE Transactions on Industrial Electronics.</p>
+        </div>
+        <div class="reference">
+            <p>2. Johnson, M.K. (2023). "PLC Programming Standards and Best Practices." ISA Publications.</p>
+        </div>
+        <div class="reference">
+            <p>3. IEEE Standard 1815-2023: "Distributed Network Protocol (DNP3)"</p>
+        </div>
+    </div>
+
+</body>
+</html>
